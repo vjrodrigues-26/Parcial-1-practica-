@@ -78,7 +78,7 @@ void mostrarPila(pila* p) { //Imprime la lista
         cout << "[" << tope(ax) << "]->";
         ax = ax->prox;
     }
-    cout << "NULL";
+    cout << " NULL";
 }
 
 /* FIN PRIMITIVAS - PILAS */
@@ -111,7 +111,6 @@ void eliminarComunesPila(pila** p, int n) {
         while (!(vacio(*p)) && tope(*p) != n) {
             apilar(&ax, tope(*p));
             desapilar(p);
-            //cout << "TOPE (TRAS EL PRIMER WHILE): " << tope(*p) << "\n";
 
         }
 
@@ -119,13 +118,10 @@ void eliminarComunesPila(pila** p, int n) {
             yaExiste = true;
             apilar(&ax, tope(*p));
             desapilar(p);
-            //cout << "TOPE NUEVO TRAS EL IF: \n" << tope(*p) << "\n";
         }
         else if (yaExiste == true) {
             apilar(&t, tope(*p));
             desapilar(p);
-            //cout << "TOPE NUEVO TRAS EL ELSEIF: \n" << tope(*p) << "\n";
-
         }
     }
     delete t;
@@ -142,16 +138,18 @@ void eliminarComunesPila(pila** p, int n) {
 int main() {
     int n = 0, op = -1, respuesta;
     lista* p = NULL; //Inicializo la cabeza de la lista
-    pila* z = NULL;
+    pila* z = NULL; //Inicializo la pila A
+    pila* y = NULL; //Inicializo la pila B
 
     while (op != 0) {
         cout << "\n\n\t\tMENU BASE DE LISTAS\n\n";
         cout << "\t1. Insertar por cabeza.\n";
         cout << "\t2. Mostrar lista.\n";
         cout << "\t3. (PRACTICA) Separar dígitos. [LISTO]\n";
-        cout << "\t4. (PRACTICA/PILA) Insertar números en la pila.\n";
-        cout << "\t5. (PRACTICA/PILA) Mostrar pila.\n";
+        cout << "\t4. (PRACTICA/PILA) Insertar números en la pila A.\n";
+        cout << "\t5. (PRACTICA/PILA) Mostrar pilas.\n";
         cout << "\t6. (PRACTICA/PILA) Eliminar comunes de una pila.\n";
+        cout << "\t7. (PRACTICA/PILA) Insertar números en la pila B.\n";
 
         cout << "\nSeleccione una opción del menú: ";
         cin >> op;
@@ -176,7 +174,7 @@ int main() {
             break;
 
         case 4:
-            cout << "Ingrese un número a insertar en la pila: ";
+            cout << "Ingrese un número a insertar en la pila A: ";
             cin >> n;
             apilar(&z, n);
             system("cls");
@@ -184,13 +182,25 @@ int main() {
 
         case 5:
             system("cls");
+            cout << "A\t";
             mostrarPila(z);
+            cout << "\n";
+            cout << "B\t";
+            mostrarPila(y);
+            //test
             break;
 
         case 6:
             cout << "Ingrese un número a borrar: ";
             cin >> n;
             eliminarComunesPila(&z, n);
+            break;
+
+        case 7:
+            cout << "Ingrese un número a insertar en la pila B: ";
+            cin >> n;
+            apilar(&y, n);
+            system("cls");
             break;
         }
     }
