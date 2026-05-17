@@ -134,6 +134,27 @@ void eliminarComunesPila(pila** p, int n) {
     mostrarPila(*p);
 }
 
+void alternarValores(pila* z, pila* y) { // 'z' es la pila A 'y' es la pila B
+    pila* ax = NULL;
+
+    while (!(vacio(z)) || !(vacio(y))) {
+        if (!(vacio(y))) {
+            apilar(&ax, tope(y));
+            desapilar(&y);
+        }
+        if (!(vacio(z))) {
+            apilar(&ax, tope(z));
+            desapilar(&z);
+        }
+    }
+
+    while (!(vacio(ax))) {
+        apilar(&y, tope(ax));
+        desapilar(&ax);
+    }
+    delete ax;
+    mostrarPila(y);
+}
 
 int main() {
     int n = 0, op = -1, respuesta;
@@ -150,6 +171,7 @@ int main() {
         cout << "\t5. (PRACTICA/PILA) Mostrar pilas.\n";
         cout << "\t6. (PRACTICA/PILA) Eliminar comunes de una pila.\n";
         cout << "\t7. (PRACTICA/PILA) Insertar números en la pila B.\n";
+        cout << "\t8. (PRACTICA/DOS PILA) Alternar valores de pila A y B en una nueva pila.\n";
 
         cout << "\nSeleccione una opción del menú: ";
         cin >> op;
@@ -187,7 +209,6 @@ int main() {
             cout << "\n";
             cout << "B\t";
             mostrarPila(y);
-            //test
             break;
 
         case 6:
@@ -201,6 +222,11 @@ int main() {
             cin >> n;
             apilar(&y, n);
             system("cls");
+            break;
+
+        case 8:
+            system("cls");
+            alternarValores(z, y);
             break;
         }
     }
